@@ -26,11 +26,12 @@ struct AddMovieView: View {
                 HStack {
                     TextField("Search movies & TV shows...", text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .onSubmit {
+                            searchAndDismissKeyboard() // Call the function when return is pressed
+                        }
                     
                     Button(action: {
-                        Task {
-                            await searchViewModel.search(query: searchText)
-                        }
+                        searchAndDismissKeyboard() // Call the function when the search button is pressed
                     }) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.white)
@@ -87,6 +88,18 @@ struct AddMovieView: View {
                 dismiss()
             })
         }
+    }
+    
+    private func searchAndDismissKeyboard() {
+        Task {
+            await searchViewModel.search(query: searchText)
+            dismissKeyboard() // Call the function to dismiss the keyboard
+        }
+    }
+    
+    private func dismissKeyboard() {
+        // Use UIApplication to resign first responder to hide the keyboard
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
