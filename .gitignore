@@ -1,0 +1,22 @@
+# Xcode
+*.xcworkspace
+*.xcuserstate
+*.xcuserdatad
+*.xcscheme
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/xcuserdata/*.xcuserdatad
+
+# Build products
+build/
+DerivedData/
+*.hmap
+
+# User-specific files
+*.swp
+*.swo
+*.DS_Store
+*.log
+
+# Archive files
+*.xcarchive
